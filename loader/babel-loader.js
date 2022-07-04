@@ -1,5 +1,5 @@
 const babel = require('@babel/core')
-const loaderUtils = require('loader-utils')
+const loaderUtils = require('loader-utils') 
 function loader(source) { // this loader的上下文
   const options = this.query
   console.log('this.resourcePath', this.resourcePath)

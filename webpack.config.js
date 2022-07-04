@@ -15,14 +15,28 @@ module.exports = {
     rules: [  
       {
         test: /\.less$/,
-        use: [path.resolve(__dirname, 'loader', 'style-loader.js'),  path.resolve(__dirname, 'loader', 'less-loader.js')]
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader' 
+        ]
       },
+      // {
+      //   test: /\.js$/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env']
+      //     }
+      //   }
+      // },
       {
-        test: /\.js$/,
+        test: /\.jpeg|jpg|png$/,
+        // use: ['file-loader']
         use: {
-          loader: 'babel-loader',
+          loader: 'url-loader',
           options: {
-            presets: ['@babel/preset-env']
+            limit: 200 * 1024
           }
         }
       }
