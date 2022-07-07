@@ -8,4 +8,4 @@ arrowFn()
 import imgSrc from './images/mengmei.jpeg'
 let img = document.createElement('img')
 img.src = imgSrc
-document.body.appendChild(img)
+// document.body.appendChild(img)

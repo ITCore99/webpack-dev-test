@@ -1,6 +1,10 @@
 const path = require('path')
 const P = require('./plugin/p.js')
 const P2 = require('./plugin/p2.js')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FileListPlugin = require('./plugins/fileList')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const InlineSourcePlugin = require('./plugins/inlineSourcePlugin')
 module.exports = {
   mode: 'development',
   entry: './src/index.js', // 由于路径有问题暂时先这样兼容
@@ -9,14 +13,15 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   resolveLoader: {
-    modules: ['node_modules', path.resolve(__dirname, 'loader')]
+    modules: ['node_modules', path.resolve(__dirname, 'loader')],
   },
   module: {
     rules: [  
       {
         test: /\.less$/,
         use: [
-          'style-loader',
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader' 
         ]
@@ -43,7 +48,17 @@ module.exports = {
     ]
   },
   plugins: [
-    new P(),
-    new P2()
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+    new FileListPlugin({
+      filename: 'fileList.md'
+    }) ,
+    new MiniCssExtractPlugin({
+      filename: 'main.css'
+    }),
+    new InlineSourcePlugin({
+      match: /\.(js|css)$/
+    }) 
   ]
 }
