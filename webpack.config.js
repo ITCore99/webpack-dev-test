@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FileListPlugin = require('./plugins/fileList')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const InlineSourcePlugin = require('./plugins/inlineSourcePlugin')
+const UploadPlugin = require('./plugins/uploadPlugin')
 module.exports = {
   mode: 'development',
   entry: './src/index.js', // 由于路径有问题暂时先这样兼容
@@ -57,8 +58,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'main.css'
     }),
-    new InlineSourcePlugin({
-      match: /\.(js|css)$/
+    // new InlineSourcePlugin({
+    //   match: /\.(js|css)$/
+    // }) 
+    new UploadPlugin({
+      bucket: 'jwstatic',
+      domain: 'img.fullstackjavascript.cn',
+      accessKey: 'Fei_-4NI-eHi-EAbhCWEKywTPzO1w7RJMlqFO8gW',
+      secretKey: 'fo-rWZ7ngnAXYfL61jtQQufLW-szTINPUfP-ofZJ'
     }) 
   ]
 }
